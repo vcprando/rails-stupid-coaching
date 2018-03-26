@@ -5,15 +5,20 @@ class QuestionsController < ApplicationController
 
   def answer
     @question = params[:question]
+
+    if @question.blank?
+      redirect_to root_path
+      return
+    end
+
+
     if @question == "I am going to work"
       @answer = "Great!"
-    elsif @question[-1].include?("?")
+    elsif @question.present? && @question[-1].include?("?")
       @answer = "Silly question, get dressed and go to work!"
     else
       @answer = "I don't care, get dressed and go to work!"
     end
 
-    if @question.empty? == true
-    end
   end
 end
